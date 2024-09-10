@@ -1,0 +1,124 @@
+$usb-min-font : 16px;
+$usb-max-font : 24px;
+$padding-small-x : 8px;
+$padding-medium-x : 10px;
+$padding-small-y : 16px;
+$padding-medium-y : 18px;
+$padding-large-x: 24px;
+$padding-large-y: 16px;
+$padding-lg : 32px;
+$padding-md : 16px;
+$padding-sm : 8px;
+$backgroundcolorBlue: blue;
+$colorWhite: #fff;
+$borderRadius-lg: 10px;
+$backgroundSubtlecolorWhite : #fff;
+$SubtleColorblue:#3548a8;
+$colorRed: red;
+$backGroundRed : red;
+
+@mixin variant($variant){
+    @if $variant == standard{
+        background-color: $backgroundcolorBlue;
+        color: $colorWhite;
+        border-radius: $borderRadius-lg;
+        border:0;
+        padding:8px 24px;
+        &:hover{
+            background-color: #090cdf;
+            color: $colorWhite;
+            border-radius: $borderRadius-lg;
+            border:0;
+        }
+    }
+    @else if $variant == highlight{
+        background-color: $backgroundSubtlecolorWhite;
+        color: $SubtleColorblue;
+        border-radius: $borderRadius-lg;
+        border: 2px solid blue;
+        padding:8px 24px;
+        &:hover{
+            background-color: $backgroundcolorBlue;
+            color: $colorWhite;
+            border-radius: $borderRadius-lg;
+            border:0;
+        }
+    }
+    @else if $variant == utility{
+        background-color: $backgroundSubtlecolorWhite;
+        color: $SubtleColorblue;
+        border-radius: $borderRadius-lg;
+        border:0;
+        padding:8px 24px;
+        &:hover{
+            background-color: $backGroundRed;
+            color: $colorWhite;
+            border-radius: $borderRadius-lg;
+            border:0;
+        }
+    }
+}
+@mixin cursor{
+    cursor: pointer;
+}
+@mixin button-size($size){
+
+    @if $size == small{
+        font-size: $usb-min-font;
+        padding: $padding-small-x $padding-small-y;
+        font-weight: 300;
+        letter-spacing: 8px;
+        @include cursor();
+    }@else if $size == medium{
+        font-size: $usb-min-font;
+        padding: $padding-medium-x $padding-medium-y;
+        font-weight: 400;
+        @include cursor();
+    }@else if $size == large{
+        font-size: $usb-max-font;
+        padding: $padding-large-x $padding-large-y;
+        font-weight: 500;
+        @include cursor();
+    }
+}
+
+.usb-button{
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: $usb-max-font;
+    padding:$padding-lg;
+    display: flex;
+    white-space:nowrap;
+    & .button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &--small{
+            @include button-size(small);
+        }
+        &--medium{
+            @include button-size(medium);
+        }
+        &--large{
+            @include button-size(large);
+        }        
+    }
+    & .button{
+        &--standard{
+            @include variant("standard");
+        }
+        &--highlight{
+            @include variant("highlight");
+        }
+        &--utility{
+            @include variant("utility");
+        }
+    }
+    & .iconPosition{
+        &--right{
+            direction: rtl;
+        }
+        &--left{
+            direction: ltr;
+        }
+    }
+}
